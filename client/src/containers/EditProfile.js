@@ -65,76 +65,13 @@ class EditProfile extends Component {
     console.log('PROPS:', this.props);
     return (
       <div>
-<<<<<<< HEAD
-      <Link to="/profile" >Profile</Link>
-      <h2>Edit Profile</h2>
-      <div className="main">
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))} >
-          <div>
-            <Button type="button" onClick={() => this.props.getProfile(this.props.initialValues.userId || 'null')} >Load Account Information
-            </Button>
-          </div>
-          <Field
-            placeholder={"UserId"}
-            label="userId"
-            name="userId"
-            component={this.renderField}
-          />
-          <Field
-            placeholder={"First Name"}
-            label="First Name"
-            name="firstName"
-            component={this.renderField}
-          />
-          <Field
-            placeholder={"Last Name"}
-            label="Last Name"
-            name="lastName"
-            component={this.renderField}
-          />
-          <Field
-            placeholder={"Email"}
-            label="Email"
-            name="email"
-            component={this.renderField}
-          />
-          <Field
-            placeholder={"Street"}
-            label="Street"
-            name="street"
-            component={this.renderField}
-          />
-          <Field
-            placeholder={"City"}
-            label="City"
-            name="city"
-            component={this.renderField}
-          />
-          <Field
-            placeholder={"State"}
-            label="State"
-            name="userState"
-            component={this.renderField}
-          />
-          <Field
-            placeholder={"Zip Code"}
-            label="Zipcode"
-            name="zipCode"
-            component={this.renderField}
-          />
-          <Button type="submit" disabled={pristine || submitting}  >Submit Changes</Button>
-          <Button type="button" disabled={pristine || submitting} onClick={reset}>Undo Changes
-          </Button>
-        </form>
-      </div>
-=======
         <Link to="/profile" >Profile</Link>
         <h2>Edit Profile</h2>
         <div className="main">
           <Paper>
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))} >
               <div className="button-margin">
-                <Button type="button" variant="contained" onClick={() => this.props.getProfile(this.props.initialValues.userId || null)} >Load Account Information
+                <Button type="button" variant="contained" onClick={() => this.props.getProfile(this.props.initialValues.userId || 'null')} >Load Account Information
                 </Button> 
               </div>
               <Field
@@ -192,7 +129,6 @@ class EditProfile extends Component {
             </form>
           </Paper> 
         </div> {/* main */}
->>>>>>> styles components
       </div>
     )
   }
