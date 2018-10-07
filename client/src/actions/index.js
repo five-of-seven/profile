@@ -27,7 +27,7 @@ export function getKarma (value) {
 export function getProfile (value) {
   const request = axios({
     method: 'GET',
-    url: `/getProfile?userId=${value}`,
+    url: `/getprofile?userId=${value}`,
     responseType: 'json',
   })
   return {

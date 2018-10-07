@@ -1,25 +1,18 @@
 .wrapper {
 	width: 100%;
-	margin-top: 10%;
+	margin-top: 5%;
 }
 
 .main {
-	width: 80%;
+	width: 50%;
 	margin: auto;
+	padding-left: 20%;
+	padding-right: 20%;
 }
 
 .label {
 	margin-top: 8px;
 	margin-bottom: 4px;
-}
-
-.form {
-	padding: 4px;
-	border: 2px solid grey;
-}
-
-.button {
-	margin: 20px;
 }
 
 li span {
@@ -29,4 +22,12 @@ li span {
 
 li {
 	margin-top: 10px;
+}
+
+form {
+	padding: 10%;
+}
+
+.button-margin {
+	margin-bottom: 10%;
 }

@@ -7,8 +7,7 @@ import { createProfile } from '../actions';
 import { getProfile } from '../actions';
 import { updateProfile } from '../actions';
 import { getKarma } from '../actions';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import { Button, TextField, Paper } from '@material-ui/core';
 import '../styles/style.css';
 
 let data = {
@@ -66,6 +65,7 @@ class EditProfile extends Component {
     console.log('PROPS:', this.props);
     return (
       <div>
+<<<<<<< HEAD
       <Link to="/profile" >Profile</Link>
       <h2>Edit Profile</h2>
       <div className="main">
@@ -127,6 +127,72 @@ class EditProfile extends Component {
           </Button>
         </form>
       </div>
+=======
+        <Link to="/profile" >Profile</Link>
+        <h2>Edit Profile</h2>
+        <div className="main">
+          <Paper>
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))} >
+              <div className="button-margin">
+                <Button type="button" variant="contained" onClick={() => this.props.getProfile(this.props.initialValues.userId || null)} >Load Account Information
+                </Button> 
+              </div>
+              <Field
+                placeholder={"UserId"}
+                label="userId"
+                name="userId"
+                component={this.renderField}
+              />
+              <Field
+                placeholder={"First Name"}
+                label="First Name"
+                name="firstName"
+                component={this.renderField}
+              />
+              <Field
+                placeholder={"Last Name"}
+                label="Last Name"
+                name="lastName"
+                component={this.renderField}
+              />
+              <Field
+                placeholder={"Email"}
+                label="Email"
+                name="email"
+                component={this.renderField}
+              />
+              <Field
+                placeholder={"Street"}
+                label="Street"
+                name="street"
+                component={this.renderField}
+              />
+              <Field
+                placeholder={"City"}
+                label="City"
+                name="city"
+                component={this.renderField}
+              />
+              <Field
+                placeholder={"State"}
+                label="State"
+                name="userState"
+                component={this.renderField}
+              />
+              <Field
+                placeholder={"Zip Code"}
+                label="Zipcode"
+                name="zipCode"
+                component={this.renderField}
+              />
+              <Button type="submit" color="primary" variant="contained" disabled={pristine || submitting}>Submit Changes
+              </Button>
+              <Button type="button" color="secondary" variant="contained"  disabled={pristine || submitting} onClick={reset}>Undo Changes
+              </Button>
+            </form>
+          </Paper> 
+        </div> {/* main */}
+>>>>>>> styles components
       </div>
     )
   }
