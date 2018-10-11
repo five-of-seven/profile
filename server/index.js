@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname, '../client/public/dist')));
 
 app.get('/userexist', function (req, res) {
   let email = req.query.email;
+  console..og('EMAIL FROM SIGNUP:', email);
   db.checkUserExist(email, function (err, data) {
     if (err) {
       res.status(500);
@@ -27,9 +28,11 @@ app.get('/userexist', function (req, res) {
       res.status(200);
       console.log('DATA:', data);
       if (data.length === 0) {
+        console.log('USER DOES NOT EXIST')
         res.send('false');
         res.end();      
       } else {
+        console.log('USER EXISTS!');
         res.send('true');
         res.end();
       }
