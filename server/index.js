@@ -32,8 +32,8 @@ app.get('/userId', function (req, res) {
         res.end();      
       } else {
         res.status(200);
-        console.log('USER EXISTS!');
-        res.send(data[0].userId);
+        console.log('USER EXISTS! ', data[0].userId);
+        res.send(data[0].userId.toString());
         res.end();
       }
     }
