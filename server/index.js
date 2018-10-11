@@ -17,6 +17,26 @@ app.use(function(req, res, next) { 
 app.use(express.static(path.join(__dirname, '../client/public/dist')));
 // app.use(express.static(path.join(__dirname, dist)));
 
+app.get('/userexist', function (req, res) {
+  let email = req.query.email;
+  db.checkUserExist(email, function (err, data) {
+    if (err) {
+      res.status(500);
+      res.end();
+    } else {
+      res.status(200);
+      console.log('DATA:', data);
+      if (data.length === 0) {
+        res.send('false');
+        res.end();      
+      } else {
+        res.send('true');
+        res.end();
+      }
+    }
+  })
+
+})
 
 app.get('/getprofile', function (req, res){
   let fakeData = {
