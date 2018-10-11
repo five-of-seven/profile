@@ -47,7 +47,7 @@ var insertIntoDB = function(userInfo, callback) {
   })
 };
 
-var checkUserExits = function (email, callback) {
+var checkUserExist = function (email, callback) {
   user.find({email: email}, function (err, data) {
     if (err) {
       console.log('user does not exist')
@@ -91,7 +91,7 @@ var updateUserProfile = function (userInfo, callback) {
 module.exports.insertIntoDB = insertIntoDB;
 module.exports.fetchUserProfile = fetchUserProfile;
 module.exports.updateUserProfile = updateUserProfile;
-module.exports.checkUserExits = checkUserExits;
+module.exports.checkUserExist = checkUserExist;
 
 
 
