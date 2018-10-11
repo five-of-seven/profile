@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, '../client/public/dist')));
 
 app.get('/userexist', function (req, res) {
   let email = req.query.email;
-  console..og('EMAIL FROM SIGNUP:', email);
+  console.log('EMAIL FROM SIGNUP:', email);
   db.checkUserExist(email, function (err, data) {
     if (err) {
       res.status(500);
