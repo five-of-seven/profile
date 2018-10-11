@@ -48,7 +48,7 @@ var insertIntoDB = function(userInfo, callback) {
 };
 
 var checkUserExist = function (email, callback) {
-  user.find({email: email}, function (err, data) {
+  User.find({email: email}, function (err, data) {
     if (err) {
       console.log('user does not exist')
     } else {
