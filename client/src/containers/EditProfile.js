@@ -3,11 +3,8 @@ import { connect } from 'react-redux';
 import bindActionCreators from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
-import { createProfile } from '../actions';
-import { getProfile } from '../actions';
-import { updateProfile } from '../actions';
-import { getKarma } from '../actions';
 import { Button, TextField, Paper } from '@material-ui/core';
+import { getProfile, updateProfile, getKarma } from '../actions';
 import '../styles/style.css';
 
 let data = {
@@ -53,9 +50,6 @@ class EditProfile extends Component {
   }
 
   onSubmit (values) {
-    console.log('INSIDE ONSUBMIT:', this.props.karma);
-    values.karma = this.props.karma.Item.points;
-    // this.props.createProfile(values);
     this.props.updateProfile(values);
   }
 
@@ -65,8 +59,12 @@ class EditProfile extends Component {
     console.log('PROPS:', this.props);
     return (
       <div>
-        <Link to="/profile" >Profile</Link>
+        <Link to="/profile">Profile</Link>
         <h2>Edit Profile</h2>
+       {/*   <Button color="primary" variant="contained">Submit Changes
+          </Button>
+          <Button color="secondary" variant="contained">Undo Changes
+          </Button> */}
         <div className="main">
           <Paper>
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))} >
@@ -181,7 +179,6 @@ function mapStateToProps (state) {
     // zipCode: state.userProfile.zipCode,
 
     initialValues: state.userProfile,
-    karma: state.karma
   };
 }
 

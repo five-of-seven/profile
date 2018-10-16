@@ -16,30 +16,26 @@ export function createProfile (values) {
   };
 }
 
-export function getKarma (value) {
+export function getKarma(value) {
   const request = axios.get(`https://u0mxny2nq6.execute-api.us-east-2.amazonaws.com/default/karma-points_get?id=${value}`);
   return {
     type: GET_KARMA,
-    payload: request
+    payload: request,
   };
 }
 
-export function getProfile (value) {
-  const request = axios({
-    method: 'GET',
-    url: `/getprofile?userId=${value}`,
-    responseType: 'json',
-  })
+export function getProfile(value) {
+  const request = axios.get(`/getprofile?userId=${value}`);
   return {
     type: GET_PROFILE,
-    payload: request
+    payload: request,
   };
 }
 
-export function updateProfile (value) {
+export function updateProfile(value) {
   const request = axios.post('/editProfile', value);
   return {
     type: UPDATE_PROFILE,
-    payload: request
+    payload: request,
   };
 }

@@ -16,7 +16,7 @@
 }
 
 li span {
-	color: red;
+	color: #7f7f7f;
 	padding: 15px;
 }
 
@@ -26,8 +26,54 @@ li {
 
 form {
 	padding: 10%;
+/*	background-color: #faf7f2;*/
+/*	background-color: #d9e8f5;*/
+/*	background-color: #f2e963;*/
 }
 
-.button-margin {
-	margin-bottom: 10%;
+/* unvisited link */
+a:link {
+	padding: 7px;
+/*  color: #7f7f7f;*/
+/*	background-color: #faf7f2;*/
+/*  color: #000000;
+  background-color: #91bed4;*/
+  font-weight: bold;
+  text-decoration: none;
+
 }
+
+/* visited link */
+a:visited {
+	padding: 7px;
+/*  color: #ad9c78;*/
+/*	background-color: #faf7f2;
+/*  color: #000000;
+  background-color: #91bed4;*/
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+	padding: 7px;
+/*  color: #7f7f7f;*/
+/*  background-color: #faf7f2;
+/*  color: #000000;
+  background-color: #91bed4;*/
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* selected link */
+a:active {
+	padding: 7px;
+/*  color: #ad9c78;*/
+/*	background-color: #faf7f2;*/
+/*  color: #000000;
+  background-color: #91bed4;*/
+  font-weight: bold;
+  text-decoration: none;
+}
+
+

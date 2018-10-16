@@ -54,7 +54,9 @@ app.get('/getprofile', function (req, res){
   }
   if (req.query.userId && req.query.userId !== 'null') {
     let userId = req.query.userId;
+    console.log('USERID:', userId);
   	db.fetchUserProfile(userId, (err, userProfile) => {
+      console.log('USERPROFILE:', userProfile);
       if (err) {
         res.status(404);
         res.end();

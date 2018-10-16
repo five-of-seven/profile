@@ -6,9 +6,11 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
+    "start-dev": "nodemon server/index.js",
     "start": "webpack & nodemon server/index.js",
     "build": "webpack -d --watch",
-    "startwebpack": "webpack  --config ./webpack.config.js --watch"
+    "startwebpack": "webpack  --config ./webpack.config.js --watch",
+    "lint": "eslint . --ext .js,.jsx"
   },
   "repository": {
     "type": "git",

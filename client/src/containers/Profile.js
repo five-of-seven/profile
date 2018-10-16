@@ -1,45 +1,43 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import { getKarma } from '../actions/index.js';
-import { getProfile } from '../actions/index.js';
-import { Link } from 'react-router-dom';
-// import _ from 'lodash';
+import { getKarma } from '../actions/index.js';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
+import { getProfile } from '../actions/index';
 import '../styles/style.css';
 
 // import axios from 'axios';
 
 class Profile extends Component {
-  constructor (props) {
-    super (props);
-    this.state= {
-      profile: {
-        userId: '0000',
-        firstName: 'Jim',
-        lastName: 'Smith',
-        email: 'john.smith@smith.com',
-        street: 'Johnsmith dr.',
-        city: 'Smithcity',
-        userState: 'Bigstate',
-        zipCode: '00000',
-        karma: 10
-      }
+  constructor(props) {
+    super(props);
+    this.state = {
+      userId: this.props.userId || this.props.location.search.slice(8),
     };
+    this.getProfileInfo = this.getProfileInfo.bind(this);
   }
 
-  componentDidMount () {
-    // const request = axios.get('https://u0mxny2nq6.execute-api.us-east-2.amazonaws.com/default/karma-points_get?id=1234');
-    // console.log('KARMA:', request);
-    // this.props.getKarma('4321');
-    this.props.getProfile(this.props.userId);
+  componentDidMount() {
+    // let userId = this.props.location.search.slice(8);
+    console.log('LOCATION:', this.props.location);
+    console.log('USERID:', this.state.userId);
+    this.props.getKarma(this.state.userId);
+    this.props.getProfile(this.state.userId);
+    console.log('PROPS:', this.props);
   }
 
-  render () {
+  getProfileInfo(userId) {
+    this.props.getKarma(userId);
+    this.props.getProfile(userId);
+  }
+
+  render() {
     // const { firstName, lastName, email, street, city, zipCode } = this.props.userProfile;
+    console.log('PROPS INSIDE RENDER:', this.props);
     return (
       <div>
-        <Link to="/" >Edit Profile</Link>
+        <Link to="/editprofile" >Edit Profile</Link>
         <h2>Profile</h2>
         <ul>
             <li>
@@ -81,8 +79,8 @@ class Profile extends Component {
 
 }
 
-function mapStateToProps (state) {
-  //whatever is returned will show up as props inside of Profile
+function mapStateToProps(state) {
+  console.log('STATE:', state);
   return {
     userId: state.userProfile.userId,
     firstName: state.userProfile.firstName,
@@ -92,12 +90,12 @@ function mapStateToProps (state) {
     city: state.userProfile.city,
     userState: state.userProfile.userState,
     zipCode: state.userProfile.zipCode,
-    karma: state.userProfile.karma
+    karma: state.karma,
   };
 }
 
 function mapDispatchToProps (dispatch) {
-  return bindActionCreators ({getProfile: getProfile}, dispatch);
+  return bindActionCreators ({getProfile: getProfile, getKarma: getKarma}, dispatch);
 }
 
 
