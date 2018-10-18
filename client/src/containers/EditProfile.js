@@ -20,9 +20,13 @@ let data = {
 class EditProfile extends Component {
   constructor (props) {
     super(props);
+    this.state = {
+      userId: this.props.location.pathname.slice(13),
+    };
   }
 
   componentDidMount () {
+  console.log('USERID:', this.state.userId);
     // this.props.getProfile(5678);
     // this.props.load(data);
     this.props.getKarma(1234);
@@ -50,6 +54,7 @@ class EditProfile extends Component {
   }
 
   onSubmit (values) {
+    console.log('VALUES:', values);
     this.props.updateProfile(values);
   }
 
@@ -59,7 +64,7 @@ class EditProfile extends Component {
     console.log('PROPS:', this.props);
     return (
       <div>
-        <Link to="/profile">Profile</Link>
+      <Link to={`/profile/${this.state.userId}`} params={{ userId: this.state.userId }}>Profile</Link> 
         <h2>Edit Profile</h2>
        {/*   <Button color="primary" variant="contained">Submit Changes
           </Button>
@@ -166,7 +171,6 @@ function validate (values)  {
 }
 
 function mapStateToProps (state) {
-  //whatever is returned will show up as props inside of Profile
   console.log('STATE:', state);
   return {
     // userId: state.userProfile.userId,

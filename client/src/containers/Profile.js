@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getKarma } from '../actions/index.js';
-import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import { getProfile } from '../actions/index';
+import { getKarma, getProfile } from '../actions/index';
 import '../styles/style.css';
 
 // import axios from 'axios';
@@ -13,23 +11,18 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: this.props.userId || this.props.location.search.slice(8),
+      // userId: this.props.userId || this.props.location.search.slice(8),
+      userId: this.props.userId || this.props.location.search.slice(8)  || this.props.location.pathname.slice(9),
     };
-    this.getProfileInfo = this.getProfileInfo.bind(this);
   }
 
   componentDidMount() {
-    // let userId = this.props.location.search.slice(8);
-    console.log('LOCATION:', this.props.location);
+    console.log('LOCATION IN PROFILE:', this.props.location);
+    console.log('USERID IN PROFILE:', this.state.userId);
     console.log('USERID:', this.state.userId);
     this.props.getKarma(this.state.userId);
     this.props.getProfile(this.state.userId);
     console.log('PROPS:', this.props);
-  }
-
-  getProfileInfo(userId) {
-    this.props.getKarma(userId);
-    this.props.getProfile(userId);
   }
 
   render() {
@@ -37,7 +30,7 @@ class Profile extends Component {
     console.log('PROPS INSIDE RENDER:', this.props);
     return (
       <div>
-        <Link to="/editprofile" >Edit Profile</Link>
+        <Link to={`/editprofile/${this.state.userId}`} params={{ userId: this.state.userId }}>Edit Profile</Link>
         <h2>Profile</h2>
         <ul>
             <li>
@@ -74,9 +67,8 @@ class Profile extends Component {
             </li>
         </ul>
       </div>
-    )
+    );
   }
-
 }
 
 function mapStateToProps(state) {
@@ -94,14 +86,14 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps (dispatch) {
-  return bindActionCreators ({getProfile: getProfile, getKarma: getKarma}, dispatch);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getProfile, getKarma }, dispatch);
 }
 
 
-export default connect (mapStateToProps, mapDispatchToProps) (Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 
-  // export default connect (null, {getProfile})(Profile);
+// export default connect (null, {getProfile})(Profile);
 
 // export default Profile;
 
