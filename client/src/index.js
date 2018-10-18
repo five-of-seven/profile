@@ -48,11 +48,17 @@ ReactDOM.render(
    <HashRouter>
      <MuiThemeProvider theme={myTheme}>
       <Switch>
-        <Route exact path="/profile" component={Profile} />
+        <Route path="/profile" component={Profile} />
         <Route path="/editprofile" component={EditProfile} />
       </Switch>
       </MuiThemeProvider>
     </HashRouter>
   </Provider>,
-  document.getElementById("root")
+  document.getElementById('root'),
 );
+
+
+
+
+
+
