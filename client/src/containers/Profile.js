@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
+import { Grid, Paper, Button } from '@material-ui/core';
 import { getKarma, getProfile } from '../actions/index';
 import '../styles/style.css';
 
@@ -30,8 +31,11 @@ class Profile extends Component {
     console.log('PROPS INSIDE RENDER:', this.props);
     return (
       <div>
-        <Link to={`/editprofile/${this.state.userId}`} params={{ userId: this.state.userId }}>Edit Profile</Link>
+      <Grid>
+    <Button variant="contained" color="secondary"> <Link to={`/editprofile/${this.state.userId}`} params={{ userId: this.state.userId }}>Edit Profile</Link> </Button>
         <h2>Profile</h2>
+        <div className="main">
+        <Paper elevation="4">
         <ul>
             <li>
               <span>Karma Points: </span>
@@ -46,8 +50,8 @@ class Profile extends Component {
               {this.props.lastName}
             </li>
             <li>
-            <span>Email: </span>
-              {this.props.email}
+            <div className="float-left">Email: </div>
+            <div className="float-left">  {this.props.email} </div>
             </li>
             <li>
             <span>Street: </span>
@@ -66,6 +70,9 @@ class Profile extends Component {
               {this.props.zipCode}
             </li>
         </ul>
+        </Paper>
+        </div>
+        </Grid>
       </div>
     );
   }

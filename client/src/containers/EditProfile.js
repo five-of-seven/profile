@@ -3,36 +3,38 @@ import { connect } from 'react-redux';
 import bindActionCreators from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
-import { Button, TextField, Paper } from '@material-ui/core';
+import { Button, TextField, Paper, Grid, withStyles } from '@material-ui/core';
 import { getProfile, updateProfile, getKarma } from '../actions';
 import '../styles/style.css';
 
-let data = {
-  firstName: 'Jim',
-  lastName: 'Smith',
-  email: 'john.smith@smith.com',
-  street: 'Johnsmith dr.',
-  city: 'Smithcity',
-  userState: 'Bigstate',
-  zipCode: '00000'
-}
+const styles = theme => ({
+  root: {
+
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+});
 
 class EditProfile extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       userId: this.props.location.pathname.slice(13),
     };
   }
 
-  componentDidMount () {
-  console.log('USERID:', this.state.userId);
-    // this.props.getProfile(5678);
-    // this.props.load(data);
-    this.props.getKarma(1234);
+  componentDidMount() {
+    console.log('USERID:', this.state.userId);
   }
 
-  renderField (field) {
+  onSubmit(values) {
+    values.userId = this.state.userId;
+    console.log('VALUES:', values);
+    this.props.updateProfile(values);
+  }
+
+  renderField(field) {
     return (
       <div>
         <div className="label">
@@ -53,135 +55,118 @@ class EditProfile extends Component {
     );
   }
 
-  onSubmit (values) {
-    console.log('VALUES:', values);
-    this.props.updateProfile(values);
-  }
 
-  render () {
+  render() {
     const { classes } = this.props;
-    const { handleSubmit, load, pristine, reset, submitting } = this.props;
+    const { handleSubmit, pristine, reset, submitting } = this.props;
     console.log('PROPS:', this.props);
     return (
       <div>
-      <Link to={`/profile/${this.state.userId}`} params={{ userId: this.state.userId }}>Profile</Link> 
+        <Button variant="contained" color="secondary">
+          <Link to={`/profile/${this.state.userId}`} params={{ userId: this.state.userId }}>
+           Profile
+          </Link>
+        </Button>
         <h2>Edit Profile</h2>
-       {/*   <Button color="primary" variant="contained">Submit Changes
-          </Button>
-          <Button color="secondary" variant="contained">Undo Changes
-          </Button> */}
         <div className="main">
-          <Paper>
-            <form onSubmit={handleSubmit(this.onSubmit.bind(this))} >
+          <Paper className={this.props.classes.root} elevation="4">
+            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
               <div className="button-margin">
-                <Button type="button" variant="contained" onClick={() => this.props.getProfile(this.props.initialValues.userId || 'null')} >Load Account Information
-                </Button> 
+            {/*    <Button type="button" variant="contained" onClick={() => this.props.getProfile(this.props.initialValues.userId || 'null')} >Load Account Information
+                </Button> */}
               </div>
               <Field
-                placeholder={"UserId"}
-                label="userId"
-                name="userId"
-                component={this.renderField}
-              />
-              <Field
-                placeholder={"First Name"}
+                placeholder="First Name"
                 label="First Name"
                 name="firstName"
                 component={this.renderField}
               />
               <Field
-                placeholder={"Last Name"}
+                placeholder="Last Name"
                 label="Last Name"
                 name="lastName"
                 component={this.renderField}
               />
               <Field
-                placeholder={"Email"}
+                placeholder="Email"
                 label="Email"
                 name="email"
                 component={this.renderField}
               />
               <Field
-                placeholder={"Street"}
+                placeholder="Street"
                 label="Street"
                 name="street"
                 component={this.renderField}
               />
               <Field
-                placeholder={"City"}
+                placeholder="City"
                 label="City"
                 name="city"
                 component={this.renderField}
               />
               <Field
-                placeholder={"State"}
+                placeholder="State"
                 label="State"
                 name="userState"
                 component={this.renderField}
               />
               <Field
-                placeholder={"Zip Code"}
+                placeholder="Zip Code"
                 label="Zipcode"
                 name="zipCode"
                 component={this.renderField}
               />
-              <Button type="submit" color="primary" variant="contained" disabled={pristine || submitting}>Submit Changes
+              <Button className={this.props.classes.button} type="submit" color="primary" variant="contained" disabled={pristine || submitting}>
+                Submit Changes
               </Button>
-              <Button type="button" color="secondary" variant="contained"  disabled={pristine || submitting} onClick={reset}>Undo Changes
+              <Button className={this.props.classes.button} type="button" color="secondary" variant="contained" disabled={pristine || submitting} onClick={reset}>
+                Undo Changes
               </Button>
             </form>
-          </Paper> 
-        </div> {/* main */}
+          </Paper>
+        </div>
       </div>
-    )
+    );
   }
 }
 
-function validate (values)  {
+function validate(values) {
   const errors = {};
   if (!values.firstName) {
-    errors.firstName = 'Please enter your first name'
+    errors.firstName = 'Please enter your first name';
   }
 
   if (!values.lastName) {
-    errors.lastName = 'Please enter your last name'
+    errors.lastName = 'Please enter your last name';
   }
 
   if (!values.email) {
-    errors.email = 'Please enter your email'
+    errors.email = 'Please enter your email';
   }
 
   if (!values.street) {
-    errors.street = 'Please enter your street address'
+    errors.street = 'Please enter your street address';
   }
 
   if (!values.city) {
-    errors.city = 'Please enter your city'
+    errors.city = 'Please enter your city';
   }
 
   if (!values.userState) {
-    errors.userState = 'Please enter your state'
+    errors.userState = 'Please enter your state';
   }
 
   if (!values.zipCode) {
-    errors.zipCode = 'Please enter your zipcode'
+    errors.zipCode = 'Please enter your zipcode';
   }
 
   return errors;
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   console.log('STATE:', state);
   return {
-    // userId: state.userProfile.userId,
-    // firstName: state.userProfile.firstName,
-    // lastName: state.userProfile.lastName,
-    // email: state.userProfile.email,
-    // street: state.userProfile.street,
-    // city: state.userProfile.city,
-    // userState: state.userProfile.userState,
-    // zipCode: state.userProfile.zipCode,
-
     initialValues: state.userProfile,
   };
 }
@@ -193,17 +178,16 @@ function mapDispatchToProps (dispatch) {
 
 // export default connect (mapStateToProps, mapDispatchToProps) (UserInfo);
 EditProfile = reduxForm({
-  validate: validate,
+  validate,
   form: 'profileForm',
   enableReinitialize: true,
   // make sure dirty fields (those the user has already edited)
   // are not overwritten by reinitialization
-  keepDirtyOnReinitialize: true
+  keepDirtyOnReinitialize: true,
   // destroyOnUnmount: false
 })(EditProfile);
-EditProfile = connect(mapStateToProps, { getKarma, getProfile, updateProfile })(EditProfile)
-    // connect(mapStateToProps, mapDispatchToProps )(EditProfile)
+EditProfile = connect(mapStateToProps, { getKarma, getProfile, updateProfile })(withStyles(styles)(EditProfile));
+// connect(mapStateToProps, mapDispatchToProps )(EditProfile)
 
 export default EditProfile;
 //proptypes
-
